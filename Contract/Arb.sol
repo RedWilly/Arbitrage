@@ -17,38 +17,39 @@ interface IERC20 {
 }
 
 interface IUniswapV2Router {
-	function getAmountsOut(uint256 amountIn, address[] memory path) external view returns (uint256[] memory amounts);
-	function swapExactTokensForTokens(uint256 amountIn, uint256 amountOutMin, address[] calldata path, address to, uint256 deadline) external returns (uint256[] memory amounts);
+  	function getAmountsOut(uint256 amountIn, address[] memory path) external view returns (uint256[] memory amounts);
+  	function swapExactTokensForTokens(uint256 amountIn, uint256 amountOutMin, address[] calldata path, address to, uint256 deadline) external returns (uint256[] memory amounts);
 }
+
 interface IUniswapV2Pair {
-  function token0() external view returns (address);
-  function token1() external view returns (address);
-  function swap(uint256 amount0Out,	uint256 amount1Out,	address to,	bytes calldata data) external;
+  	function token0() external view returns (address);
+  	function token1() external view returns (address);
+  	function swap(uint256 amount0Out,	uint256 amount1Out,	address to,	bytes calldata data) external;
 }
 
 contract Arb is Ownable {
 
-  address [] public routers;
-  address [] public tokens;
-  address [] public stables;
+	address [] public routers;
+	address [] public tokens;
+	address [] public stables;
 
-  function addRouters(address[] calldata _routers) external onlyOwner {
-    for (uint i=0; i<_routers.length; i++) {
-      routers.push(_routers[i]);
-    }
-  }
+	function addRouters(address[] calldata _routers) external onlyOwner {
+		for (uint i=0; i<_routers.length; i++) {
+		routers.push(_routers[i]);
+		}
+	}
 
-  function addTokens(address[] calldata _tokens) external onlyOwner {
-    for (uint i=0; i<_tokens.length; i++) {
-      tokens.push(_tokens[i]);
-    }
-  }
+	function addTokens(address[] calldata _tokens) external onlyOwner {
+		for (uint i=0; i<_tokens.length; i++) {
+		tokens.push(_tokens[i]);
+		}
+	}
 
-  function addStables(address[] calldata _stables) external onlyOwner {
-    for (uint i=0; i<_stables.length; i++) {
-      stables.push(_stables[i]);
-    }
-  }
+	function addStables(address[] calldata _stables) external onlyOwner {
+		for (uint i=0; i<_stables.length; i++) {
+		stables.push(_stables[i]);
+		}
+	}
 
 	function swap(address router, address _tokenIn, address _tokenOut, uint256 _amount) private {
 		IERC20(_tokenIn).approve(router, _amount);
