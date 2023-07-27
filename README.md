@@ -3,3 +3,5 @@ This Contract Support Dual Dex Arbitrage, TriDex Abitrage and Triangular/Triangl
 ... explanation later...
 
 Forked and improved( all in one) from https://github.com/knackroot-technolabs-llp/DEX-Arbitrage/
+
+Also this contract is not optimised for gas
